@@ -7,8 +7,8 @@ export default router
 
     .post('/register', 
         (req: Request, res: Response) => {
-            const { nome, sobrenome } = req.body
-            res.status(200).send(`Pessoa ${nome} ${sobrenome} recebida com sucesso!`);
+            const { nome, age: age } = req.body
+            res.status(200).send(`Pessoa ${nome} ${age} recebida com sucesso!`);
         }
     )
 
@@ -20,8 +20,8 @@ export default router
 
     .get('/getDataQuery', 
         (req: Request, res: Response) => {
-            const { nome, sobrenome } = req.query
-            res.status(200).send(`Fazendo um GET no servidor! Nome: ${nome}, Idade: ${sobrenome}`);
+            const { nome, age: age } = req.query
+            res.status(200).send(`Fazendo um GET no servidor! Nome: ${nome}, Idade: ${age}`);
         }
     )
 
@@ -35,9 +35,9 @@ export default router
     .put('/usuarios/:id', 
         (req: Request, res: Response) => {
             const { id } = req.params;
-            const { nome, sobrenome } = req.body;
+            const { nome, age: age } = req.body;
 
-            res.status(200).send(`Pessoa com o id: ${id} foi atualizado para ${nome} ${sobrenome}`)
+            res.status(200).send(`Pessoa com o id: ${id} foi atualizado para ${nome} ${agr}`)
         }
     )
 

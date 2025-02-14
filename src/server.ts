@@ -1,14 +1,12 @@
 import express from 'express';
-import router from './routes/routes.js'
+import initRoutes from './routes/routes.ts';
+import connectDB from './database/database.ts';
 
 const app = express();
+
+connectDB();
+initRoutes(app);
+
 const port = 8080;
 
-router(app)
-app.listen(port, 
-    () => console.log(`Acesse: http://localhost:${port}/`)
-);
-
-app.get('/getTeste', (req, res) => {
-    res.send('GET: Requisição recebida com sucesso!');
-}); 
+app.listen(port, () => console.log(`Acesse: http://localhost:${port}/`));
