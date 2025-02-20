@@ -1,0 +1,6 @@
+<div class="cards-container">
+    @for (item of (tasks | async)?.tasks; track $index) 
+    {
+        <app-card [task]='item'></app-card>
+    }
+</div>

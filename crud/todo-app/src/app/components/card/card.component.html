@@ -1,0 +1,17 @@
+<mat-card class="card">
+    <mat-card-header>
+      <mat-card-title style="color: rgb(255, 255, 255);"><a [href]="'/' + task?._id">{{task?.title}}</a></mat-card-title>
+    </mat-card-header>
+    
+    <mat-card-content>
+      <p>Status: {{task?.completed}}</p>
+    </mat-card-content>
+    
+    <mat-card-footer class="footer">
+      <div class="dates">
+        <p>Created: {{task?.createdAt}}</p>
+        <p>Updated: {{task?.updatedAt}}</p>
+      </div>
+    </mat-card-footer>
+</mat-card>
+  

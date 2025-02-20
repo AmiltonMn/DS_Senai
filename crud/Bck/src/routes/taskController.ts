@@ -1,5 +1,6 @@
 import express, { Request, Response, Router } from "express";
 import Task from "../models/Task.ts";
+import { dayjs } from '../lib/dayjs.ts'
 
 const router : Router = express.Router();
 
@@ -13,7 +14,10 @@ export default router
                     res.status(204).json({message: "Erro de envio dos dados!"})
                 }
 
-                let newtask = new Task({title, description, completed})
+                let date = dayjs(Date.now()).format('L')
+                console.log(date)
+
+                let newtask = new Task({title, description, completed, createdAt: date})
                 await newtask.save()
                 res.status(200).json({message: `Nova task criada com sucesso!`, task: {newtask}})
             } catch (error) {
@@ -22,7 +26,7 @@ export default router
         }
     )
 
-    .get('',
+    .get('/get',
         async (req: Request, res: Response) => {
             try {
                 let tasks = await Task.find()
