@@ -1,15 +1,15 @@
 <mat-card>
     <mat-card-title>
-        <p>{{task?.title}}</p>
+        <p>{{(task | async)?.title}}</p>
     </mat-card-title>
 
     <mat-card-content>
-        <p>Status: {{task?.completed}}</p>
-        <p>Descrição: {{task?.description}}</p>
+        <p>Status: {{(task | async)?.completed}}</p>
+        <p>Descrição: {{(task | async)?.description}}</p>
     </mat-card-content>
 
     <mat-card-footer>
-        <p>Created: {{task?.createdAt}}</p>
-        <p>Updated: {{task?.updatedAt}}</p>
+        <p>Created: {{(task | async)?.createdAt}}</p>
+        <p>Updated: {{(task | async)?.updatedAt}}</p>
     </mat-card-footer>
 </mat-card>

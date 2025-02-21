@@ -3,10 +3,12 @@ import { CardComponent } from '../../components/card/card.component';
 import { TaskData, TasksService } from '../../service/tasks-service.service';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs/internal/Observable';
+import { AddTaskComponent } from '../../components/add-task/add-task.component';
+import { RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-tasks-page',
-  imports: [ CardComponent, CommonModule ],
+  imports: [ CardComponent, CommonModule, AddTaskComponent, RouterOutlet ],
   templateUrl: './tasks-page.component.html',
   styleUrl: './tasks-page.component.css'
 })

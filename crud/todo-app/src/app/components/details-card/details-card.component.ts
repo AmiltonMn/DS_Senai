@@ -14,5 +14,5 @@ import { CommonModule } from '@angular/common';
 export class DetailsCardComponent {
 
   @Input()
-  task: Task | undefined
+  task: Observable<Task> | undefined
 }

@@ -14,7 +14,7 @@ import { CommonModule } from '@angular/common';
 })
 export class DetailsPageComponent implements OnInit {
 
-  task: Task | undefined
+  task: Observable<Task> | undefined
 
   constructor(
     private service: TasksService,

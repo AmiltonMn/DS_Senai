@@ -1,0 +1,19 @@
+.button-container {
+    display: flex;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 30px;
+}
+
+.add-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 40px;
+    background-color: black;
+    color: white;
+}
+
+.add-button :hover {
+    scale: 1.1;
+}
