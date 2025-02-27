@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  IdCliente Int @id @default(autoincrement())
+  Nome String
+  Telefone String
+  Endereco String
+  Veiculos Veiculo[]
+  Ordens OrdemServico[]
+}
+
+model Veiculo {
+  IdVeiculo Int @id @default(autoincrement())
+  Marca String
+  Modelo String
+  Ano Int
+  Placa String
+  ClienteId Int
+  Cliente Cliente @relation(fields: [ClienteId], references: [IdCliente])
+  Ordens OrdemServico[]
+}
+
+model Servico {
+  IdServico Int @id @default(autoincrement())
+  Descricao String      
+  Preco Float       
+  Itens ItemServico[]
+}
+
+model OrdemServico {
+  IdOrdemServico Int @id @default(autoincrement())
+  DataEntrada DateTime
+  DataConclusao DateTime?
+  Status String          
+  Observacoes String?
+  ClienteId Int
+  VeiculoId Int
+  Cliente Cliente @relation(fields: [ClienteId], references: [IdCliente])
+  Veiculo Veiculo @relation(fields: [VeiculoId], references: [IdVeiculo])
+  Itens ItemServico[]
+}
+
+model ItemServico {
+  IdItemServico Int @id @default(autoincrement())
+  Quantidade Int             
+  OrdemId Int
+  ServicoId Int
+  Ordem OrdemServico @relation(fields: [OrdemId], references: [IdOrdemServico])
+  Servico Servico @relation(fields: [ServicoId], references: [IdServico])
+}
+
+// ? Exemplode 1:1
+ 
+// model User {
+// id Int @id @default(autoincrement())
+// profile Profile?
+// }
+
+// model Profile {
+// id Int @id @default(autoincrement())
+// user User @relation(fields: [userId], references: [id])
+// userId Int @unique // relation scalar field (used in the `@relation` attribute above)
+// }
+
+
+// Exemplo de 1:N
+// model User {
+//   id Int @id @default(autoincrement())
+//   posts Post[]
+// }
+
+// model Post {
+//   id Int @id @default(autoincrement())
+//   author User @relation(fields: [authorId], references: [id])
+//   authorId Int
+// }
