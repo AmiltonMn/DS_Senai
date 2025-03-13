@@ -1,0 +1,4 @@
+-- AlterTable
+ALTER TABLE `pokemon` MODIFY `IsBaby` BOOLEAN NOT NULL DEFAULT false,
+    MODIFY `IsLegendary` BOOLEAN NOT NULL DEFAULT false,
+    MODIFY `IsMythic` BOOLEAN NOT NULL DEFAULT false;

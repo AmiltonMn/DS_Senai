@@ -3,6 +3,7 @@ import ApiController from '../Controllers/ApiController'
 
 const router = express.Router()
 
-router.get('/:id', ApiController.GetPokemon)
+router.get('/:name', ApiController.GetPokemon)
+router.get('/', ApiController.GetAllPokemon)
 
 export default router;

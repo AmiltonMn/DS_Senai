@@ -6,3 +6,16 @@ datasource db {
   provider = "mysql"
   url = env("DATABASE_URL")
 }
+
+model Pokemon {
+  Id Int @id  
+  Name String
+  Capture_rate Int
+  Base_Happiness Int?
+  IsBaby Boolean?
+  IsLegendary Boolean?
+  IsMythic Boolean?
+  Image String
+  Captured Boolean
+  Tries Int @default(0)
+}

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE `pokemon` ADD COLUMN `Tries` INTEGER NOT NULL DEFAULT 0;
