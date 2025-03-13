@@ -6,5 +6,4 @@ export default function (app: Express) {
     app
         .use(express.json())
         .use('/api', ApiRoutes)
-
 }

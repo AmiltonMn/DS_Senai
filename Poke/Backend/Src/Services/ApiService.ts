@@ -14,7 +14,7 @@ class ApiService {
     static async GetAllPokemons() : Promise<any> {
 
         try {
-            const response = await axios.get(`${APIURL}/pokemon`)
+            const response = await axios.get(`${APIURL}/pokemon/?limit=1302`)
         } catch (error) {
             console.log(`Ocorreu um erro ao pegar os dados: ${error}`)
         }
