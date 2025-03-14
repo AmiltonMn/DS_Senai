@@ -31,7 +31,7 @@ class ApiService {
         }
     }
 
-    static async GetAll() : Promise<any> {
+    static async SetAll() : Promise<any> {
         try {
             const response = await axios.get(`${APIURL}/pokemon-species?limit=1000000`)
             
@@ -59,10 +59,18 @@ class ApiService {
                 })
             });
 
-            return "Pokemon data gotten successfully"
+            return Prisma.pokemon.findMany()
         } catch (error) {
             console.log(`Ocorreu um erro ao pegar os dados: ${error}`)
             return
+        }
+    }
+
+    static async GetAll() : Promise<any> {
+        try {
+            return Prisma.pokemon.findMany()
+        } catch (error) {
+            return "Erro"
         }
     }
 }

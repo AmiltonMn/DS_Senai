@@ -1,14 +1,10 @@
 import express from 'express';
 import initRoutes from './Routes/routes'
-import cors from 'cors';
 
 const app = express();
 
-app.use(
-    cors({
-        origin: '*', // Permite apenas requisições desta origem
-    })
-);
+import cors from 'cors';
+app.use(cors());
 const port = 8080;
 
 initRoutes(app);
