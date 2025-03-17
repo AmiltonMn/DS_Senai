@@ -1,26 +1,38 @@
 <div class="info-container">
     <mat-form-field class="form">
-      <mat-label>Escolha um pokemon</mat-label>
+      <mat-label>Poké Search</mat-label>
       <mat-select [(ngModel)]='name' (ngModelChange)="ChangeSelectedPokemon(name)"
         canSelectNullableOptions
         panelClass="pannel"
         >
         @for (pokemon of (options | async)?.pokemon; track pokemon) {
-          <mat-option [value]="pokemon.Name">{{pokemon.Name}}</mat-option>
+          <mat-option [value]="pokemon.Name">{{pokemon.Name | titlecase}}</mat-option>
         }
       </mat-select>
     </mat-form-field>
 
     <!-- Cards with media area -->
-    <mat-card class="example-card" appearance="outlined">
+    <mat-card class="poke-card" appearance="outlined">
         <mat-card-header>
-        <mat-card-title-group>
-            <mat-card-title>{{(selectedPokemon | async)?.pokemon.Name}}</mat-card-title>
-            <mat-card-subtitle></mat-card-subtitle>
-            <img mat-card-sm-image src= >
-        </mat-card-title-group>
+          @if (selectedPokemon == null) {
+            <mat-card-title-group>
+              <mat-card-title>Escolha um Pokémon</mat-card-title>
+            </mat-card-title-group>
+          } @else {
+            <mat-card-title-group>
+              <mat-card-title>{{(selectedPokemon | async)?.pokemon.Name | titlecase}}</mat-card-title>
+            </mat-card-title-group>
+          }
         </mat-card-header>
-        <mat-card-content>
-        </mat-card-content>
+        @if (selectedPokemon != null) {
+          <mat-card-content>
+            <img mat-card-sm-image [src]="(selectedPokemon | async)?.pokemon.Image" >
+          </mat-card-content>
+        } @else {
+          <mat-card-content style="display: flex; align-items: center; flex-direction: column; gap: 10;">
+            <img mat-card-sm-image src="https://cdn10.bigcommerce.com/s-yhxhf/products/12203/images/39419/15A056__99200.1671054232.300.300.png?c=2" >
+            <p>Selecione um pokémon para verificar os status sobre ele</p>
+          </mat-card-content>
+        }
     </mat-card>
 </div>
