@@ -5,5 +5,6 @@ const router = express.Router()
 
 router.get('/:name', ApiController.GetPokemon)
 router.get('/', ApiController.GetAllPokemon)
+router.post('/setPokemons', ApiController.SetAll)
 
 export default router;

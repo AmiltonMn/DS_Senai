@@ -21,7 +21,8 @@ class ApiService {
                 IsBaby: data.is_baby,
                 IsLegendary: data.is_legendary,
                 IsMythic: data.is_mythic,
-                Image: imageData.sprites.front_default
+                Image: imageData.sprites.front_default,
+                Color: data.color
             }
 
             return Poke
@@ -54,7 +55,8 @@ class ApiService {
                         IsLegendary: data.is_legendary,
                         IsMythic: data.is_mythic,
                         Image: imageData.sprites.front_default,
-                        Captured: false
+                        Captured: false,
+                        Color: data.color.name
                     }
                 })
             });

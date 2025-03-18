@@ -1,6 +1,6 @@
 <div class="info-container">
     <mat-form-field class="form">
-      <mat-label>Poké Search</mat-label>
+      <mat-label class="label">Poké Search</mat-label>
       <mat-select [(ngModel)]='name' (ngModelChange)="ChangeSelectedPokemon(name)"
         canSelectNullableOptions
         panelClass="pannel"
@@ -13,26 +13,37 @@
 
     <!-- Cards with media area -->
     <mat-card class="poke-card" appearance="outlined">
-        <mat-card-header>
-          @if (selectedPokemon == null) {
-            <mat-card-title-group>
-              <mat-card-title>Escolha um Pokémon</mat-card-title>
-            </mat-card-title-group>
+      @if (selectedPokemon == null) {
+            <mat-card-header>
+              <mat-card-title-group>
+                <mat-card-title>Escolha um Pokémon</mat-card-title>
+              </mat-card-title-group>
+            </mat-card-header>
           } @else {
-            <mat-card-title-group>
-              <mat-card-title>{{(selectedPokemon | async)?.pokemon.Name | titlecase}}</mat-card-title>
-            </mat-card-title-group>
+            <mat-card-header [ngStyle]="{'background-color': (selectedPokemon | async)?.pokemon.Color.name}" style="border-radius: 15px 15px 0px 0px; z-index: 1">
+              <mat-card-title-group [ngStyle]="{'background-color': (selectedPokemon | async)?.pokemon.Color.name}">
+                <mat-card-title style="color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 30px; position: relative; top: 20px">{{(selectedPokemon | async)?.pokemon.Name | titlecase}}</mat-card-title>
+              </mat-card-title-group>
+            </mat-card-header>
           }
-        </mat-card-header>
         @if (selectedPokemon != null) {
-          <mat-card-content>
-            <img mat-card-sm-image [src]="(selectedPokemon | async)?.pokemon.Image" >
+          <mat-card-content [ngStyle]="{'background-color': (selectedPokemon | async)?.pokemon.Color.name}">
+            <div style="display: flex; justify-content: center;">
+              <img mat-card-sm-image style="width: 180px; height: 180px; position: relative; top: 40px; z-index: 50" [src]="(selectedPokemon | async)?.pokemon.Image" >
+            </div>
           </mat-card-content>
         } @else {
-          <mat-card-content style="display: flex; align-items: center; flex-direction: column; gap: 10;">
-            <img mat-card-sm-image src="https://cdn10.bigcommerce.com/s-yhxhf/products/12203/images/39419/15A056__99200.1671054232.300.300.png?c=2" >
-            <p>Selecione um pokémon para verificar os status sobre ele</p>
+          <mat-card-content style="display: flex; flex-direction: column;">
+            <div style="display: flex; flex-direction: column; align-items: center;">
+              <img mat-card-sm-image style="width: 150px; height: 150px; margin-top: 20px; margin-bottom: 20px" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/132.png">
+              <p>Selecione um pokémon para verificar seus status, a chance de aparição, suas tentativas e outros valores.</p>
+            </div>
           </mat-card-content>
         }
+    </mat-card>
+    <mat-card class="poke-card" style="z-index: 1; position: relative; bottom: 30px; height: 200px; border-radius: 15px 15px 15px 15px">
+      <mat-card-content>
+
+      </mat-card-content>
     </mat-card>
 </div>

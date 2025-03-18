@@ -6,5 +6,6 @@ export interface PokemonData {
     IsBaby: boolean,
     IsLegendary: boolean,
     IsMythic: boolean,
-    Image: string
+    Image: string,
+    Color: string
 }

@@ -7,9 +7,17 @@
 }
 
 .form {
-    width: 380px;
+    width: 25%;
 }
 
 .poke-card {
-    width: 380px;
+    width: 25%;
+    border-radius: 15px 15px 0px 0px;
+    border: none;
+    box-shadow: none;
+}
+
+body {
+    overflow-y: hidden;
+    height: fit-content;
 }

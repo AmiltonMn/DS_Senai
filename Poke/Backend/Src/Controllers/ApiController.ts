@@ -24,6 +24,16 @@ class ApiController {
             console.log(`An erro has occurred: ${error}`)
         }
     }
+
+    static async SetAll(req: Request, res: Response) : Promise<any> {
+
+        try {
+            let data = await ApiService.SetAll()
+            res.status(200).json({pokemon: data})
+        } catch (error) {
+            res.status(404)
+        }
+    }
 }
 
 export default ApiController;

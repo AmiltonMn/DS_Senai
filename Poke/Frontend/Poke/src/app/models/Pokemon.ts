@@ -8,5 +8,6 @@ export interface PokemonData {
     IsMythic: boolean,
     Image: string,
     Captured: boolean,
-    Tries: number
+    Tries: number,
+    Color: string
 }
