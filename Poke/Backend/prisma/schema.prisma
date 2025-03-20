@@ -16,7 +16,7 @@ model Pokemon {
   IsLegendary Boolean?
   IsMythic Boolean?
   Image String
-  Captured Boolean
+  Captured Boolean @default(false)
   Tries Int @default(0)
   Color String
 }

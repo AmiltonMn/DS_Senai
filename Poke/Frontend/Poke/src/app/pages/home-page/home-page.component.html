@@ -1,35 +1,37 @@
 <div class="info-container">
     <mat-form-field class="form">
-      <mat-label class="label">Poké Search</mat-label>
-      <mat-select [(ngModel)]='name' (ngModelChange)="ChangeSelectedPokemon(name)"
-        canSelectNullableOptions
-        panelClass="pannel"
-        >
-        @for (pokemon of (options | async)?.pokemon; track pokemon) {
-          <mat-option [value]="pokemon.Name">{{pokemon.Name | titlecase}}</mat-option>
+    <mat-label>Pokémon</mat-label>
+      <input type="text"  
+            matInput
+            [formControl]="myControl"
+            [matAutocomplete]="auto"
+            [(ngModel)]='pokeName' (ngModelChange)="ChangeSelectedPokemon(pokeName)">
+      <mat-autocomplete #auto="matAutocomplete">
+        @for (name of filteredOptions | async; track name)  {
+          <mat-option [value]="name | titlecase">{{name | titlecase}}</mat-option>
         }
-      </mat-select>
+      </mat-autocomplete>
     </mat-form-field>
 
     <!-- Cards with media area -->
-    <mat-card class="poke-card" appearance="outlined">
-      @if (selectedPokemon == null) {
+    <mat-card class="poke-card" appearance="outlined" style="border-radius: 25px;">
+      @if (!found) {
             <mat-card-header>
               <mat-card-title-group>
                 <mat-card-title>Escolha um Pokémon</mat-card-title>
               </mat-card-title-group>
             </mat-card-header>
           } @else {
-            <mat-card-header [ngStyle]="{'background-color': (selectedPokemon | async)?.pokemon.Color.name}" style="border-radius: 15px 15px 0px 0px; z-index: 1">
-              <mat-card-title-group [ngStyle]="{'background-color': (selectedPokemon | async)?.pokemon.Color.name}">
-                <mat-card-title style="color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 30px; position: relative; top: 20px">{{(selectedPokemon | async)?.pokemon.Name | titlecase}}</mat-card-title>
+            <mat-card-header [ngStyle]="{'background-color': selectedPokemon?.Color}" style="border-radius: 15px 15px 0px 0px; z-index: 1">
+              <mat-card-title-group [ngStyle]="{'background-color': selectedPokemon?.Color}">
+                <mat-card-title style="color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 30px; position: relative; top: 20px">{{selectedPokemon?.Name | titlecase}}</mat-card-title>
               </mat-card-title-group>
             </mat-card-header>
           }
-        @if (selectedPokemon != null) {
-          <mat-card-content [ngStyle]="{'background-color': (selectedPokemon | async)?.pokemon.Color.name}">
+        @if (found) {
+          <mat-card-content [ngStyle]="{'background-color': selectedPokemon?.Color}">
             <div style="display: flex; justify-content: center;">
-              <img mat-card-sm-image style="width: 180px; height: 180px; position: relative; top: 40px; z-index: 50" [src]="(selectedPokemon | async)?.pokemon.Image" >
+              <img mat-card-sm-image style="width: 180px; height: 180px; position: relative; top: 40px; z-index: 50" [src]="selectedPokemon?.Image" >
             </div>
           </mat-card-content>
         } @else {
@@ -41,9 +43,38 @@
           </mat-card-content>
         }
     </mat-card>
-    <mat-card class="poke-card" style="z-index: 1; position: relative; bottom: 30px; height: 200px; border-radius: 15px 15px 15px 15px">
-      <mat-card-content>
+    @if (!found) {
+    } @else {
+      <mat-card class="poke-card" style="z-index: 1; position: relative; bottom: 30px; height: 200px; border-radius: 15px 15px 15px 15px; padding-top: 35px; padding-left: 25px;">
+        <mat-card-content style="display: flex; justify-content: center; flex-direction: column">
+          <div class="poke-attribute">
+            <p class="poke-attribute-title">Chance de Captura</p>
+            <p class="poke-attribute-value">{{selectedPokemon?.CaptureRate}}</p>
+          </div>
 
-      </mat-card-content>
-    </mat-card>
+          <div class="poke-attribute">
+            <p class="poke-attribute-title">Felicidade Base</p>
+            <p class="poke-attribute-value">{{selectedPokemon?.BaseHappiness}}</p>
+          </div>
+
+          <div class="poke-attribute">
+            <p class="poke-attribute-title">Tentativas</p>
+            @if (selectedPokemon?.Tries == null) {
+              <p class="poke-attribute-value">0</p>
+            } @else {
+              <p class="poke-attribute-value">{{selectedPokemon?.Tries}}</p>
+            }
+          </div>
+
+          <div class="poke-attribute">
+            <p class="poke-attribute-title">Capturado</p>
+            @if (selectedPokemon?.Captured) {
+              <div class="captured"></div>
+            } @else {
+              <div class="not-captured"></div>
+            }
+          </div>
+        </mat-card-content>
+      </mat-card>
+    }
 </div>

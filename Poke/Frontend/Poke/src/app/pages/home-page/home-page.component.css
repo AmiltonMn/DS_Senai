@@ -17,6 +17,41 @@
     box-shadow: none;
 }
 
+.poke-attribute {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.poke-attribute-title {
+    font-weight: 500;
+    color: #3aa39c;
+    font-size: large;
+    margin-left: 50px;
+}
+
+.poke-attribute-value {
+    margin-right: 121px;
+}
+
+.captured {
+    width: 20px;
+    height: 20px;
+    background-color: greenyellow;
+    margin-right: 120.5px;
+    border-radius: 999px;
+}
+
+.not-captured {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(253, 52, 52);
+    margin-right: 120.5px;
+    border-radius: 999px;
+}
+
 body {
     overflow-y: hidden;
     height: fit-content;

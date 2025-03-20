@@ -20,7 +20,7 @@ export class PokeService {
         return this.http.get<PokemonDt>(`${this.BackendUrl}/api`);  // Faz a requisição para a API
     }
 
-    getByName(name: string): Observable<PokemonData> {
+    getByName(name: string): Observable<any> {
         return this.http.get<PokemonData>(`${this.BackendUrl}/api/${name}`)
     }
 
