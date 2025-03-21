@@ -1,15 +1,15 @@
-import { Component, OnChanges, OnInit, output, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule, ReactiveFormsModule, FormControl } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { PokemonDt, PokeService } from '../../services/poke-service.service';
-import { elementAt, map, Observable, startWith, tap } from 'rxjs';
+import { PokeService } from '../../services/poke-service.service';
+import { map, Observable, startWith, tap } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PokemonData } from '../../models/Pokemon';
-import { subscribeToArray } from 'rxjs/internal/util/subscribeToArray';
+import { PokeCardComponent } from "../../components/poke-card/poke-card.component";
 
 @Component({
   selector: 'app-home-page',
@@ -23,27 +23,25 @@ import { subscribeToArray } from 'rxjs/internal/util/subscribeToArray';
     MatCardModule,
     MatAutocompleteModule,
     AsyncPipe,
-    ReactiveFormsModule
-  ],
+    ReactiveFormsModule,
+    PokeCardComponent
+],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent implements OnInit {
-onKey(arg0: any) {
-throw new Error('Method not implemented.');
-}
-  myControl = new FormControl('');
+
+  name = new FormControl('');
   pokeName: string = "";
-  selectedPokemon: Observable<PokemonData> | undefined = undefined;
+  selectedPokemon: PokemonData | undefined = undefined;
   data: any;
   options: string[] = [];
   found: boolean = false;
   filteredOptions: Observable<string[]> | undefined;
 
   constructor(
-    private service: PokeService  // Injeção do serviço
+    private service: PokeService
   ) { }
-  
   ngOnInit(): void {
     let pokemon = this.service.get();
     pokemon.subscribe(
@@ -53,8 +51,8 @@ throw new Error('Method not implemented.');
         }
       )
     )
-
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    
+    this.filteredOptions = this.name.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
@@ -67,18 +65,19 @@ throw new Error('Method not implemented.');
   }
 
   ChangeSelectedPokemon(name: string) {
-    this.service.getByName(name).subscribe(
-      (response) => {
+    this.service.getByName(name.toLowerCase())
+      .subscribe(val => {
+        this.selectedPokemon = val.pokemon
+        console.log(val.pokemon)
 
-        this.selectedPokemon = response.pokemon;
-
-        if (response.pokemon.Name == name) {
+        if (this.selectedPokemon?.Name == name.toLowerCase()) {
+          console.log("Achou")
+          console.log(this.selectedPokemon.Color.name)
           this.found = true
-          console.log(this.selectedPokemon)
         } else {
-          this.found = true
+          this.found = false
         }
-      }
-    )
+    });
+    console.log("Observable" + this.service.getByName(name))
   }
 }

@@ -9,5 +9,8 @@ export interface PokemonData {
     Image: string,
     Captured: boolean,
     Tries: number,
-    Color: string
+    Color: {
+        name: string,
+        url: string    
+    }
 }

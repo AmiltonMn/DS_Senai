@@ -1,58 +1,28 @@
 .info-container {
     display: flex;
     align-items: flex-end;
-    margin-top: 50px;
+    justify-content: center;
     margin-right: 50px;
     flex-direction: column;
+    position: relative;
+    top: 70px
 }
 
 .form {
-    width: 25%;
+    width: 20%;
 }
 
-.poke-card {
-    width: 25%;
-    border-radius: 15px 15px 0px 0px;
-    border: none;
-    box-shadow: none;
-}
-
-.poke-attribute {
+.pokedex {
+    width: 20%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-.poke-attribute-title {
-    font-weight: 500;
-    color: #3aa39c;
-    font-size: large;
-    margin-left: 50px;
-}
-
-.poke-attribute-value {
-    margin-right: 121px;
-}
-
-.captured {
-    width: 20px;
-    height: 20px;
-    background-color: greenyellow;
-    margin-right: 120.5px;
-    border-radius: 999px;
-}
-
-.not-captured {
-    width: 20px;
-    height: 20px;
-    background-color: rgb(253, 52, 52);
-    margin-right: 120.5px;
-    border-radius: 999px;
+.pokedex-img:hover {
+    cursor: pointer;
 }
 
 body {
     overflow-y: hidden;
-    height: fit-content;
 }

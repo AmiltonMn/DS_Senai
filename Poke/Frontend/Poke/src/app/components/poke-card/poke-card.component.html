@@ -1,0 +1,63 @@
+<mat-card class="poke-card" appearance="outlined" style="border-radius: 25px;">
+    @if (!found) {
+          <mat-card-header>
+            <mat-card-title-group>
+              <mat-card-title>Escolha um Pokémon</mat-card-title>
+            </mat-card-title-group>
+          </mat-card-header>
+        } @else {
+          <mat-card-header [ngStyle]="{'background-color': selectedPokemon?.Color?.name}" style="border-radius: 15px 15px 0px 0px; z-index: 1">
+            <mat-card-title-group [ngStyle]="{'background-color': selectedPokemon?.Color?.name}">
+              <mat-card-title style="color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000; font-size: 30px; position: relative; top: 20px">{{selectedPokemon?.Name | titlecase}}</mat-card-title>
+            </mat-card-title-group>
+          </mat-card-header>
+        }
+      @if (found) {
+        <mat-card-content [ngStyle]="{'background-color': selectedPokemon?.Color?.name}">
+          <div style="display: flex; justify-content: center;">
+            <img mat-card-sm-image style="width: 180px; height: 180px; position: relative; top: 40px; z-index: 50" [src]="selectedPokemon?.Image" >
+          </div>
+        </mat-card-content>
+      } @else {
+        <mat-card-content style="display: flex; flex-direction: column;">
+          <div style="display: flex; flex-direction: column; align-items: center;">
+            <img mat-card-sm-image style="width: 150px; height: 150px; margin-top: 20px; margin-bottom: 20px" src="https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/132.png">
+            <p>Selecione um pokémon para verificar seus status, a chance de aparição, suas tentativas e outros valores.</p>
+          </div>
+        </mat-card-content>
+      }
+  </mat-card>
+  @if (!found) {
+  } @else {
+    <mat-card class="poke-card" style="z-index: 1; position: relative; display: flex; bottom: 30px; height: 200px; border-radius: 15px 15px 15px 15px; padding-top: 35px; align-items: center">
+      <mat-card-content style="display: flex; flex-direction: column" class="poke-attributes-content">
+        <div class="poke-attribute">
+          <p class="poke-attribute-title">Chance de Captura</p>
+          <p class="poke-attribute-value">{{selectedPokemon?.CaptureRate}}</p>
+        </div>
+
+        <div class="poke-attribute">
+          <p class="poke-attribute-title">Felicidade Base</p>
+          <p class="poke-attribute-value">{{selectedPokemon?.BaseHappiness}}</p>
+        </div>
+
+        <div class="poke-attribute">
+          <p class="poke-attribute-title">Tentativas</p>
+          @if (selectedPokemon?.Tries == null) {
+            <p class="poke-attribute-value">0</p>
+          } @else {
+            <p class="poke-attribute-value">{{selectedPokemon?.Tries}}</p>
+          }
+        </div>
+
+        <div class="poke-attribute">
+          <p class="poke-attribute-title">Capturado</p>
+          @if (selectedPokemon?.Captured) {
+            <div class="captured"></div>
+          } @else {
+            <div class="not-captured"></div>
+          }
+        </div>
+      </mat-card-content>
+    </mat-card>
+  }

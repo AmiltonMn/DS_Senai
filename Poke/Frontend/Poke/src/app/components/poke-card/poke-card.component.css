@@ -1,0 +1,42 @@
+.poke-attribute {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.poke-attribute-title {
+    font-weight: 500;
+    color: #3aa39c;
+    font-size: large;
+}
+
+.poke-attributes-content {
+    display: flex;
+}
+
+.poke-attribute-value {
+    margin-left: 80px;
+}
+
+.poke-card {
+    border-radius: 15px 15px 0px 0px;
+    border: none;
+    box-shadow: none;
+    justify-content: center;
+}
+
+.captured {
+    width: 20px;
+    height: 20px;
+    background-color: greenyellow;
+    border-radius: 999px;
+}
+
+.not-captured {
+    width: 20px;
+    height: 20px;
+    background-color: rgb(253, 52, 52);
+    border-radius: 999px;
+}
+
