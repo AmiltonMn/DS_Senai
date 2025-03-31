@@ -22,11 +22,12 @@ export class PokemonAppearComponent implements OnInit {
       this.randomizeId();
       this.service.getPokemon("", this.id).subscribe(
         value => {
-          this.pokemon = value;
-          console.log(value)
+          this.pokemon = value.pokemon;
         }
       )
-    }, 800)
+      
+      console.log(this.pokemon?.Image)
+    }, 5000)
   }
 
   private randomizeId() {

@@ -81,6 +81,5 @@ export class HomePageComponent implements OnInit {
           this.found = false
         }
     });
-    console.log("Observable" + this.service.getPokemon(name))
   }
 }
