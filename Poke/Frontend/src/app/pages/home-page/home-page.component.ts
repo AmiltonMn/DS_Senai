@@ -10,6 +10,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { PokemonData } from '../../models/Pokemon';
 import { PokeCardComponent } from "../../components/poke-card/poke-card.component";
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
+import { PokemonAppearComponent } from '../../components/pokemon-appear/pokemon-appear.component';
 
 @Component({
   selector: 'app-home-page',
@@ -24,7 +26,8 @@ import { PokeCardComponent } from "../../components/poke-card/poke-card.componen
     MatAutocompleteModule,
     AsyncPipe,
     ReactiveFormsModule,
-    PokeCardComponent
+    PokeCardComponent,
+    PokemonAppearComponent
 ],
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.css']
@@ -44,12 +47,15 @@ export class HomePageComponent implements OnInit {
   ) { }
   ngOnInit(): void {
     let pokemon = this.service.get();
+
     pokemon.subscribe(
-      value => value.pokemon.forEach(
-        element => {
-          this.options.push(element.Name)
-        }
-      )
+      value => {
+        value.pokemon.forEach(
+          element => {
+            this.options.push(element.Name)
+          }
+        )
+      }
     )
     
     this.filteredOptions = this.name.valueChanges.pipe(
@@ -65,19 +71,16 @@ export class HomePageComponent implements OnInit {
   }
 
   ChangeSelectedPokemon(name: string) {
-    this.service.getByName(name.toLowerCase())
+    this.service.getPokemon(name.toLowerCase(), undefined)
       .subscribe(val => {
         this.selectedPokemon = val.pokemon
-        console.log(val.pokemon)
 
         if (this.selectedPokemon?.Name == name.toLowerCase()) {
-          console.log("Achou")
-          console.log(this.selectedPokemon.Color.name)
           this.found = true
         } else {
           this.found = false
         }
     });
-    console.log("Observable" + this.service.getByName(name))
+    console.log("Observable" + this.service.getPokemon(name))
   }
 }

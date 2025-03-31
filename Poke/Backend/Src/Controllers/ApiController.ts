@@ -31,7 +31,11 @@ class ApiController {
             let data = await ApiService.SetAll()
             res.status(200).json({pokemon: data})
         } catch (error) {
-            res.status(404)
+            res.status(404).json(
+                {
+                    message: "An error has occurred: " + error
+                }
+            )
         }
     }
 }

@@ -6,7 +6,7 @@
 
 body {
     background-image: url('../assets/Background.webp');
-    background-size: 82%;
+    background-size: 100% 100%;
     background-repeat: repeat-x;
     overflow-y: hidden;
 }
@@ -14,3 +14,6 @@ body {
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

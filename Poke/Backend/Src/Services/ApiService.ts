@@ -4,9 +4,27 @@ import { PokemonData } from "../Dtos/pokemonData";
 import { Prisma } from '../Lib/Prisma'
 
 class ApiService {
-    static async GetPokemon(name?: string) : Promise<any> {
+    static async GetPokemon(name?: string, id?: number) : Promise<any> {
         try {
-            const response = await axios.get(`${APIURL}/pokemon-species/${name}`)
+
+            var response = {
+                data: {
+                    id: 0,
+                    name: "",
+                    capture_rate: 0,
+                    base_happiness: 0,
+                    is_baby: false,
+                    is_legendary: false,
+                    is_mythic: false,
+                    color: ""
+                }
+            };
+
+            if (name != undefined || name === "") {
+                response = await axios.get(`${APIURL}/pokemon-species/${name}`)
+            } else {
+                response = await axios.get(`${APIURL}/pokemon-species/${id}`)
+            }
 
             let data = response.data
 
@@ -28,7 +46,7 @@ class ApiService {
             return Poke
         } catch (error) {
             console.log(`Ocorreu o seguinte erro ao pegar os dados do pokemon: ${error}`)
-            return
+            return 
         }
     }
 

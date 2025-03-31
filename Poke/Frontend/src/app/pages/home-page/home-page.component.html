@@ -1,0 +1,31 @@
+<div style="display: flex; flex-direction: row; justify-content: space-between;">
+  <div>
+    <app-pokemon-appear></app-pokemon-appear>
+  </div>
+  
+  <div class="info-container">
+      <mat-form-field class="form">
+      <mat-label>Pokémon</mat-label>
+        <input type="text"  
+              matInput
+              [formControl]="name"
+              [matAutocomplete]="auto"
+              >
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="ChangeSelectedPokemon($event.option.value)">
+          @for (name of filteredOptions | async; track name)  {
+            <mat-option [value]="name | titlecase">{{name | titlecase}}</mat-option>
+          }
+        </mat-autocomplete>
+      </mat-form-field>
+  
+      <div style="width: 20%;">
+        <app-poke-card [selectedPokemon]="selectedPokemon" [found]="found"></app-poke-card>
+      </div>
+  
+      <div class="pokedex">
+        <a href="/pokedex">
+          <img class="pokedex-img" src="https://raw.githubusercontent.com/sleduardo20/pokedex/0671af442dff1d8f7141e49eb83b438885bbc9e9/public/img/logo.svg" alt="" width="200px">
+        </a>
+      </div>
+  </div>
+</div>
