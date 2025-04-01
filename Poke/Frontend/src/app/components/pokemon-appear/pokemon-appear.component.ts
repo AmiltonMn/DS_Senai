@@ -16,21 +16,26 @@ export class PokemonAppearComponent implements OnInit {
 
   pokemon: PokemonData | undefined;
   id: number = 0;
+  top: number = 0;
+  left: number = 0;
+  bottom: number = 0;
 
   ngOnInit(): void {
     setInterval(() => { 
-      this.randomizeId();
+      this.Randomize();
       this.service.getPokemon("", this.id).subscribe(
         value => {
           this.pokemon = value.pokemon;
         }
       )
-      
-      console.log(this.pokemon?.Image)
     }, 5000)
   }
 
-  private randomizeId() {
+  private Randomize() {
     this.id = Math.floor(Math.random() * 1025) + 1;
+    this.top = Math.floor(Math.random() * 1000) + 1;
+    this.left = Math.floor(Math.random() * 1000) + 1;
+    this.bottom = Math.floor(Math.random() * 1000) + 1;
+    console.log('Top: ' + this.top + ' Left: ' + this.left + ' Bottom: ' + this.bottom);
   }
 }
